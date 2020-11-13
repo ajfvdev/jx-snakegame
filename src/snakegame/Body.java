@@ -4,9 +4,6 @@ package snakegame;
 
 import javafx.scene.shape.Rectangle;
 
-/**
- * @author Alfredo Jose Flores Vargas
- */
 public class Body extends Rectangle {
 
     static final int UP = 0, RIGHT = 1, DOWN = 2, LEFT = 3;
@@ -62,7 +59,7 @@ public class Body extends Rectangle {
     public void moveUP() {
         posY--;
         if(posY < 0){ // would be lose if want it.
-            posY = maxY - 1;
+            posY = maxY;
         }
     }
     
@@ -83,7 +80,7 @@ public class Body extends Rectangle {
     public void moveLEFT() {
         posX--;
         if(posX < 0){ 
-            posX = maxX - 1;
+            posX = maxX;
         }
     }
     
@@ -92,5 +89,40 @@ public class Body extends Rectangle {
         setTranslateX(posX * JxSnakegame.BLOCK_SIZE);
         setTranslateY(posY * JxSnakegame.BLOCK_SIZE);
     }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public int getOldPosX() {
+        return oldPosX;
+    }
+
+    public void setOldPosX(int oldPosX) {
+        this.oldPosX = oldPosX;
+    }
+
+    public int getOldPosY() {
+        return oldPosY;
+    }
+
+    public void setOldPosY(int oldPosY) {
+        this.oldPosY = oldPosY;
+    }
+    
+    
+    
 
 }

@@ -6,24 +6,20 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Alfredo Jose Flores Vargas
- *
- */
+
 public class JxSnakegame extends Application {
 
-    static int BLOCK_SIZE = 10; // every body size.
+    static int BLOCK_SIZE = 20; // every body size.
 
-    private int width = 30, height = 15;
+    private int width = 30, height = 20;
 
     private int SnakeInitialLength = 5;
-    
-    private long then = System.nanoTime();
 
+    private long then = System.nanoTime();
 
     @Override
     public void start(Stage primaryStage) {
@@ -34,13 +30,12 @@ public class JxSnakegame extends Application {
         Camp camp = new Camp(width, height);
         camp.addSnake(new Snake(SnakeInitialLength, camp));
 
-
         // Infinite loop, re-execute that doesn't block the main thread.
         AnimationTimer timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
-                if (now - then > 1000000000) {
+                if (now - then > 1000000000 / 4) {
                     camp.update();
                     then = now;
                 }
@@ -53,6 +48,25 @@ public class JxSnakegame extends Application {
         root.getChildren().add(camp);
 
         Scene scene = new Scene(root);
+
+        scene.setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.UP) && camp.getSnakeDirection() != Body.DOWN) {
+                camp.setSnakeDirection(Body.UP);
+            }
+            if (e.getCode().equals(KeyCode.DOWN) && camp.getSnakeDirection() != Body.UP) {
+                camp.setSnakeDirection(Body.DOWN);
+
+            }
+            if (e.getCode().equals(KeyCode.LEFT) && camp.getSnakeDirection() != Body.RIGHT) {
+                camp.setSnakeDirection(Body.LEFT);
+
+            }
+            if (e.getCode().equals(KeyCode.RIGHT) && camp.getSnakeDirection() != Body.LEFT) {
+                camp.setSnakeDirection(Body.RIGHT);
+
+            }
+        });
+
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Snake Game");
