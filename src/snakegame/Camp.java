@@ -27,7 +27,7 @@ public class Camp extends Pane{
         pane_w = width;
         pane_h = height;
         
-        setMinSize(pane_w * JxSnakegame.block_size, pane_h * JxSnakegame.block_size);
+        setMinSize(pane_w * JxSnakegame.BLOCK_SIZE, pane_h * JxSnakegame.BLOCK_SIZE);
         setBackground(new Background(new BackgroundFill(Color.WHITE, null, null) ) );
         
         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(1) ) ));
@@ -37,6 +37,12 @@ public class Camp extends Pane{
         this.snake = snake;
         for(Body b: snake.bodies) {
             addBody(b);
+        }
+    }
+    
+    public void update() {
+        for(Body b: bodies){
+            b.update();
         }
     }
     
